@@ -1,8 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Square} from "./components/Square";
 
-function App() {
+function App(): any {
+  return (
+    <>
+        <div className="board-row">
+            <Square value={1}/>
+            <Square value={4}/>
+            <Square value={5}/>
+        </div>
+        <div className="board-row">
+            <Square value={4}/>
+            <Square value={5}/>
+            <Square value={6}/>
+        </div>
+        <div className="board-row">
+            <Square value={7}/>
+            <Square value={8}/>
+            <Square value={9}/>
+        </div>
+    </>
+  );
+}
+
+export default App;
+
+/* function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +45,6 @@ function App() {
       </header>
     </div>
   );
-}
+}*/
 
-export default App;
+// export default App;
