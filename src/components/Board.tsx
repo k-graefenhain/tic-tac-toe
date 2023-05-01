@@ -11,8 +11,17 @@ export class Board extends Component<any, any> {
     }
 
     render() {
+        const winner = this.calculateWinner(this.state.squares);
+        let status;
+        if (winner) {
+            status = "Winner: " + winner;
+        } else {
+            status = "Next player: " + (this.state.xIsNext ? "x" : "o");
+        }
+
         return (
             <>
+                <div className="status">{status}</div>
                 <div className="board-row">
                     <Square value={this.state.squares[0]}
                             onSquareClick={(e: React.MouseEvent) => {
@@ -77,6 +86,10 @@ export class Board extends Component<any, any> {
         }
         this.onUpdateSquare(index);
 
+        if (this.calculateWinner(this.state.squares)) {
+            return;
+        }
+
         // flip xIsNext
         this.setState((state: ComponentState) => {
             return {
@@ -100,5 +113,25 @@ export class Board extends Component<any, any> {
                 squares: updatedSquares
             };
         });
+    }
+
+    private calculateWinner(squares: string[]): string | null {
+        const lines = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6],
+        ]
+        for (const line of lines) {
+            const [a,b,c] = line;
+            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                return squares[a]
+            }
+        }
+        return null;
     }
 }
