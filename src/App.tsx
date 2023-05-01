@@ -1,26 +1,10 @@
 import React from 'react';
 import './App.css';
-import {Square} from "./components/Square";
+import {Board} from "./components/Board";
 
 function App(): any {
   return (
-    <>
-        <div className="board-row">
-            <Square />
-            <Square />
-            <Square />
-        </div>
-        <div className="board-row">
-            <Square />
-            <Square />
-            <Square />
-        </div>
-        <div className="board-row">
-            <Square />
-            <Square />
-            <Square />
-        </div>
-    </>
+    <Board />
   );
 }
 
