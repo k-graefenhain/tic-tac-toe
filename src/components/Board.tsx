@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, ComponentState} from "react";
 import {Square} from "./Square";
 
 export class Board extends Component<any, any> {
@@ -67,14 +67,27 @@ export class Board extends Component<any, any> {
         );
     }
 
+    // updating the squares state of the board component will re-render the Board and all of its children
+    // -> the value prop of the Board with the corresponding index will update from null to 'x'
     handleClick(e: React.MouseEvent, index: number): void {
         console.log("square clicked: " + index);
-        const updatedSquares = this.state.squares.slice();
-        updatedSquares[index] = "x";
-        // updating the squares state of the board component will re-render the Board and all of its children
-        // -> the value prop of the Board with the corresponding index will update from null to 'x'
-        this.setState({
-            squares: updatedSquares
+        this.onUpdateSquare(index);
+    }
+
+    private onUpdateSquare(index: number) {
+        // state may be updated asynchronously -> use arrow function
+        // (see https://legacy.reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous)
+        this.setState((state: ComponentState) => {
+            const updatedSquares = state.squares.map((item: any, i: number) => {
+                if (i === index) {
+                    return "x";
+                } else {
+                    return item;
+                }
+            });
+            return {
+                squares: updatedSquares
+            };
         });
     }
 }

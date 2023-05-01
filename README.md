@@ -4,6 +4,12 @@ This project is built to learn react. I used the [Tic Tac Toe Tutorial](https://
 but modified it and built the project with Typescript.
 
 ---
+#### Useful resources
+
+* For managing React State with Arrays: https://www.robinwieruch.de/react-state-array-add-update-remove/
+* MobX and React: https://mobx.js.org/react-integration.html
+
+---
 The scaffold was built with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Available Scripts
