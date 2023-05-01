@@ -5,6 +5,7 @@ export class Board extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
+            xIsNext: true,
             squares: Array(9).fill(null)
         }
     }
@@ -71,7 +72,17 @@ export class Board extends Component<any, any> {
     // -> the value prop of the Board with the corresponding index will update from null to 'x'
     handleClick(e: React.MouseEvent, index: number): void {
         console.log("square clicked: " + index);
+        if (this.state.squares[index]) {
+            return;
+        }
         this.onUpdateSquare(index);
+
+        // flip xIsNext
+        this.setState((state: ComponentState) => {
+            return {
+                xIsNext: !state.xIsNext
+            }
+        })
     }
 
     private onUpdateSquare(index: number) {
@@ -80,7 +91,7 @@ export class Board extends Component<any, any> {
         this.setState((state: ComponentState) => {
             const updatedSquares = state.squares.map((item: any, i: number) => {
                 if (i === index) {
-                    return "x";
+                    return state.xIsNext ? "x" : "o";
                 } else {
                     return item;
                 }
