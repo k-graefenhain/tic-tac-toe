@@ -8,6 +8,7 @@ export class Board extends Component<any, any> {
             xIsNext: true,
             squares: Array(9).fill(null)
         }
+        this.resetBoard = this.resetBoard.bind(this);
     }
 
     render() {
@@ -73,6 +74,9 @@ export class Board extends Component<any, any> {
                             }}
                     />
                 </div>
+                <button className="reset-button"
+                        onClick={this.resetBoard}>Reset
+                </button>
             </>
         );
     }
@@ -133,5 +137,12 @@ export class Board extends Component<any, any> {
             }
         }
         return null;
+    }
+
+    private resetBoard() {
+        this.setState( {
+            xIsNext: true,
+            squares: Array(9).fill(null)
+        });
     }
 }
